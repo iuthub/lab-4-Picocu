@@ -21,6 +21,12 @@
 			  	  echo  "<li class =\"mp3item\"><a href =\"songs/".basename($filename, ".mp3").".mp3\">".basename($filename, ".mp3").".mp3</a></li>";
 				}
 				?>
+				<?php
+				foreach (glob("songs/*.txt") as $filename) {
+			  	  echo  "<li class =\"playlistitem\"><a href =\"songs/".basename($filename, ".txt").".txt\">".basename($filename, ".mp3").".txt</a></li>";
+				}
+				?>
+
 				<!-- <li class="mp3item">
 					<a href="songs/Be More.mp3">Be More.mp3</a>
 					(5438375 b)
