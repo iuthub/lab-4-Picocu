@@ -8,6 +8,23 @@
 	</head>
 	<body>
 		
+		<?php
+			function writeMsg($filename) {
+    		$filesize = filesize($filename);
+					if ($filesize<1024) {
+						$extraInfo = $filesize." b";
+					}else if($filesize>=1024 and $filesize < 1048575)
+					{
+						$extraInfo = round($filesize / 1024, 2)." kb";
+					}else{
+						$extraInfo = round($filesize / 1024 / 1024, 2)." Mb";
+					}
+			  		return  $extraInfo;
+		}
+
+		?>
+
+
 		<div id="header">
 
 			<h1>190M Music Playlist Viewer</h1>
@@ -18,12 +35,11 @@
 		<div id="listarea">
 			<ul id="musiclist">
 				<?php 
- 		if(isset($_REQUEST['playlist'])){       //use isset() to avoid an error
+ 		if(isset($_REQUEST['playlist'])){       
     	if($_REQUEST['playlist'] == "playlist.txt"){
 
     		 $fh = fopen('songs/playlist.txt','r');
 			while ($line = fgets($fh)) {
- 			 // <... Do your work with the line ...>
 				echo  "<li class =\"mp3item\"><a href =\"songs/".$line."\">".$line."</a></li>";
 
 			}
@@ -33,7 +49,6 @@
 
        		 $fh = fopen('songs/mypicks.txt','r');
 			while ($line = fgets($fh)) {
- 			 // <... Do your work with the line ...>
 				echo  "<li class =\"mp3item\"><a href =\"songs/".$line."\">".$line."</a></li>";
 
 			}
@@ -41,7 +56,6 @@
   		 }else if($_REQUEST['playlist'] == '190M Mix.txt'){
   		 	$fh = fopen('songs/190M Mix.txt','r');
 			while ($line = fgets($fh)) {
- 			 // <... Do your work with the line ...>
 				echo  "<li class =\"mp3item\"><a href =\"songs/".$line."\">".$line."</a></li>";
 
 			}
@@ -54,9 +68,10 @@
 			} 
 			else{
 				foreach (glob("songs/*.mp3") as $filename) {
-			  	  echo  "<li class =\"mp3item\"><a href =\"songs/".basename($filename, ".mp3").".mp3\">".basename($filename, ".mp3").".mp3</a></li>";
+			  	  echo  "<li class =\"mp3item\"><a href =\"songs/".basename($filename, ".mp3").".mp3\">".basename($filename, ".mp3").".mp3 (".writeMsg($filename).")</a></li>";
 				}
 				foreach (glob("songs/*.txt") as $filename) {
+
 			  	  echo  "<li class =\"playlistitem\"><a href =\"songs/".basename($filename, ".txt").".txt\">".basename($filename, ".mp3")."</a></li>";
 				}
 
