@@ -57,16 +57,12 @@
   		 	$fh = fopen('songs/190M Mix.txt','r');
 			while ($line = fgets($fh)) {
 				echo  "<li class =\"mp3item\"><a href =\"songs/".$line."\">".$line."</a></li>";
-
 			}
 			fclose($fh);
-
   		 }else{
   		 	echo "<h1>No such kinda file</l1>";
-  		 }
-
-			} 
-			else{
+  		 	}
+		}else {
 				foreach (glob("songs/*.mp3") as $filename) {
 			  	  echo  "<li class =\"mp3item\"><a href =\"songs/".basename($filename, ".mp3").".mp3\">".basename($filename, ".mp3").".mp3 (".writeMsg($filename).")</a></li>";
 				}
@@ -77,46 +73,7 @@
 
 			}
 		 ?>
-				<!-- <?php
-				foreach (glob("songs/*.mp3") as $filename) {
-			  	  echo  "<li class =\"mp3item\"><a href =\"songs/".basename($filename, ".mp3").".mp3\">".basename($filename, ".mp3").".mp3</a></li>";
-				}
-				?>
-				<?php
-				foreach (glob("songs/*.txt") as $filename) {
-			  	  echo  "<li class =\"playlistitem\"><a href =\"songs/".basename($filename, ".txt").".txt\">".basename($filename, ".mp3")."</a></li>";
-				}
-				?>
- -->
-
-				<!-- <li class="mp3item">
-					<a href="songs/Be More.mp3">Be More.mp3</a>
-					(5438375 b)
-				</li>
-
-				<li class="mp3item">
-					<a href="songs/Drift Away.mp3">Drift Away.mp3</a>
-					(5724612 b)
-				</li>
-
-				<li class="mp3item">
-					<a href="songs/Hello.mp3">Hello.mp3</a>
-
-					(1871110 b)
-				</li>
-
-				<li class="mp3item">
-					<a href="songs/Panda Sneeze.mp3">Panda Sneeze.mp3</a>
-					(58 b)
-				</li>
-
-				<li class="playlistitem">
-					<a href="music.php?playlist=mypicks.txt">mypicks.txt</a>
-				</li>
-
-				<li class="playlistitem">
-					<a href="music.php?playlist=playlist.txt">playlist.txt</a>
-				</li> -->
+				
 			</ul>
 		</div>
 	</body>
