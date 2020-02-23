@@ -12,11 +12,16 @@
 			<h1>190M Music Playlist Viewer</h1>
 			<h2>Search Through Your Playlists and Music</h2>
 		</div>
-
+		
 
 		<div id="listarea">
 			<ul id="musiclist">
-				<li class="mp3item">
+				<?php
+				foreach (glob("songs/*.mp3") as $filename) {
+			  	  echo  "<li class =\"mp3item\"><a href =\"songs/".basename($filename, ".mp3").".mp3\">".basename($filename, ".mp3").".mp3</a></li>";
+				}
+				?>
+				<!-- <li class="mp3item">
 					<a href="songs/Be More.mp3">Be More.mp3</a>
 					(5438375 b)
 				</li>
@@ -43,7 +48,7 @@
 
 				<li class="playlistitem">
 					<a href="music.php?playlist=playlist.txt">playlist.txt</a>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 	</body>
