@@ -7,6 +7,7 @@
 		<link href="viewer.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body>
+		
 		<div id="header">
 
 			<h1>190M Music Playlist Viewer</h1>
@@ -16,16 +17,62 @@
 
 		<div id="listarea">
 			<ul id="musiclist">
-				<?php
+				<?php 
+ 		if(isset($_REQUEST['playlist'])){       //use isset() to avoid an error
+    	if($_REQUEST['playlist'] == "playlist.txt"){
+
+    		 $fh = fopen('songs/playlist.txt','r');
+			while ($line = fgets($fh)) {
+ 			 // <... Do your work with the line ...>
+				echo  "<li class =\"mp3item\"><a href =\"songs/".$line."\">".$line."</a></li>";
+
+			}
+			fclose($fh);
+
+   		 }else if($_REQUEST['playlist'] == 'mypicks.txt'){
+
+       		 $fh = fopen('songs/mypicks.txt','r');
+			while ($line = fgets($fh)) {
+ 			 // <... Do your work with the line ...>
+				echo  "<li class =\"mp3item\"><a href =\"songs/".$line."\">".$line."</a></li>";
+
+			}
+			fclose($fh);
+  		 }else if($_REQUEST['playlist'] == '190M Mix.txt'){
+  		 	$fh = fopen('songs/190M Mix.txt','r');
+			while ($line = fgets($fh)) {
+ 			 // <... Do your work with the line ...>
+				echo  "<li class =\"mp3item\"><a href =\"songs/".$line."\">".$line."</a></li>";
+
+			}
+			fclose($fh);
+
+  		 }else{
+  		 	echo "<h1>No such kinda file</l1>";
+  		 }
+
+			} 
+			else{
+				foreach (glob("songs/*.mp3") as $filename) {
+			  	  echo  "<li class =\"mp3item\"><a href =\"songs/".basename($filename, ".mp3").".mp3\">".basename($filename, ".mp3").".mp3</a></li>";
+				}
+				foreach (glob("songs/*.txt") as $filename) {
+			  	  echo  "<li class =\"playlistitem\"><a href =\"songs/".basename($filename, ".txt").".txt\">".basename($filename, ".mp3")."</a></li>";
+				}
+
+			}
+		 ?>
+				<!-- <?php
 				foreach (glob("songs/*.mp3") as $filename) {
 			  	  echo  "<li class =\"mp3item\"><a href =\"songs/".basename($filename, ".mp3").".mp3\">".basename($filename, ".mp3").".mp3</a></li>";
 				}
 				?>
 				<?php
 				foreach (glob("songs/*.txt") as $filename) {
-			  	  echo  "<li class =\"playlistitem\"><a href =\"songs/".basename($filename, ".txt").".txt\">".basename($filename, ".mp3").".txt</a></li>";
+			  	  echo  "<li class =\"playlistitem\"><a href =\"songs/".basename($filename, ".txt").".txt\">".basename($filename, ".mp3")."</a></li>";
 				}
 				?>
+ -->
 
 				<!-- <li class="mp3item">
 					<a href="songs/Be More.mp3">Be More.mp3</a>
